@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: onn-bikes
+  datasource:
+    url: ${SUPABASE_DB_URL:jdbc:postgresql://localhost:5432/bike_rental}
+    username: ${SUPABASE_DB_USER:postgres}
+    password: ${SUPABASE_DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    open-in-view: false
+
+app:
+  supabase:
+    url: ${SUPABASE_URL:http://localhost:54321}
+    anon-key: ${SUPABASE_PUBLISHABLE_KEY:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdEDwNgnZepGp7R9z8hv8U}
+    jwt-secret: ${SUPABASE_JWT_SECRET:your-supabase-jwt-secret-must-be-at-least-32-chars-long}
+
+  # Default search radius for nearby stations (in KM)
+  rental:
+    default-search-radius: 5.0
+    default-threshold-replenish: 3
